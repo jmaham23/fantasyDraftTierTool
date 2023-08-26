@@ -3,6 +3,7 @@ import {BehaviorSubject, map, mergeAll} from "rxjs";
 import {Player, Position} from "./shared/models/player.model";
 import {Sort} from "@angular/material/sort";
 import {HttpClient, HttpResponse} from "@angular/common/http";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -10,24 +11,10 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 export class PlayerSelectionService {
   endpoint: string = "https://sheets.googleapis.com/v4/spreadsheets/";
   sheet_id: string = "1aeCDrRHeqY2oLdrcqfirsl4bjca3pcjUg3RP5fJrtyc";
-  api_key: string = "";
+  api_key: string = environment.apiKey;
 
   playerSource: BehaviorSubject<Player[]> = new BehaviorSubject<Player[]>([]);
 
-  // playerSource: BehaviorSubject<Player[]> = new BehaviorSubject([
-  //   new Player("Justin Jefferson", Position.WIDE_RECEIVER, 1, 1),
-  //   new Player("Christian McCaffrey", Position.RUNNING_BACK, 1, 2),
-  //   new Player("Ja'Marr Chase", Position.WIDE_RECEIVER, 1, 3),
-  //   new Player("Austin Ekeler", Position.RUNNING_BACK, 1, 4),
-  //   new Player("Tyreek Hill", Position.WIDE_RECEIVER, 1, 5),
-  //   new Player("Travis Kelce", Position.TIGHT_END, 1, 6),
-  //   new Player("Bijan Robinson", Position.RUNNING_BACK, 1, 7),
-  //   new Player("Cooper Kupp", Position.WIDE_RECEIVER, 1, 8),
-  //   new Player("Nick Chubb", Position.RUNNING_BACK, 1, 9),
-  //   new Player("Saquan Barkley", Position.RUNNING_BACK, 2, 10),
-  //   new Player("Stefon Diggs", Position.WIDE_RECEIVER, 2, 11),
-  //   new Player("Tony Pollard", Position.RUNNING_BACK, 2, 12),
-  // ]);
   removedPlayerSource: BehaviorSubject<any> = new BehaviorSubject([]);
   constructor(private httpClient: HttpClient) {
     this.updatePlayerList();
@@ -107,16 +94,6 @@ export class PlayerSelectionService {
   private compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-
-  // updatePlayerList() {
-  //   const url = this.endpoint + this.sheet_id + "/values/Half PPR?key=" + this.api_key;
-  //   this.httpClient.get<Player[]>(url).subscribe(result =>  {
-  //     const filteredResult = result.slice(2);
-  //     this.playerSource.next(filteredResult);
-  //     console.log(JSON.stringify(this.playerSource.value));
-  //   });
-  //   console.log(JSON.stringify(this.playerSource.value));
-  // }
 
   updatePlayerList() {
     console.log("Calling API");

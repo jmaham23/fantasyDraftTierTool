@@ -1,8 +1,18 @@
 .table {
-    width: 100%;
+  width: 100%;
+}
+
+.odd-tier {
+  background-color: lightblue; /* Set the background color for odd tiers */
+}
+
+/* CSS for Even Tiers */
+.even-tier {
+  background-color: lightgreen; /* Set the background color for even tiers */
+
 }
 
 tr.draftboard-row:hover {
-    background: #777;
-    cursor:pointer;
+  background: #777;
+  cursor:pointer;
 }

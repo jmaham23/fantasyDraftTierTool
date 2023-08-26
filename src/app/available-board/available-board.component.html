@@ -24,9 +24,9 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr
-    class="draftboard-row"
     mat-row
     (click)="removeFromList(row)"
     *matRowDef="let row; columns: displayedColumns"
+    [ngClass]="[row.tier % 2 === 0 ? 'even-tier' : 'odd-tier', 'draftboard-row']"
   ></tr>
 </table>
