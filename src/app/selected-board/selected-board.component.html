@@ -1,4 +1,4 @@
-<table #selectedBoard mat-table [dataSource]="players" matSort (matSortChange)="announceSortChange($event)" class="table">
+<table #selectedBoard mat-table [dataSource]="players" matSort (matSortChange)="sortChange($event)" matSortActive="rank" matSortDirection="asc" class="table">
     <!--Name Column -->
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name</th>
@@ -27,8 +27,8 @@
     <tr
             class="draftboard-row"
             mat-row
-            (click)="removeFromList(i, row)"
-            *matRowDef="let row; columns: displayedColumns; let i = index"
+            (click)="removeFromList(row)"
+            *matRowDef="let row; columns: displayedColumns"
     ></tr>
 </table>
 

@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {Player} from "../shared/models/player.model";
-import {MatTable} from "@angular/material/table";
-import {MatSortModule, Sort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import {PlayerSelectionService} from "../player-selection.service";
 
 @Component({
@@ -10,37 +10,31 @@ import {PlayerSelectionService} from "../player-selection.service";
   styleUrls: ['./selected-board.component.css']
 })
 export class SelectedBoardComponent implements AfterViewInit{
-  players!: Player[];
+  players: MatTableDataSource<Player> = new MatTableDataSource<Player>([]);
   displayedColumns: string[] = ['name', 'position', 'tier', 'rank'];
-  @ViewChild(MatTable) selectedBoard!: MatTable<Player>;
-  constructor(private playerSelectionService: PlayerSelectionService) {
-    this.players = [];
+  @ViewChild(MatSort) sort!: MatSort
+  constructor(private playerSelectionService: PlayerSelectionService, private changeDetector: ChangeDetectorRef) {
   }
 
-  removeFromList(index: number, row: Player){
-    this.playerSelectionService.addPlayer(index);
-    console.log("Added Player:" + row.name);
-    console.log("Player List Size: " + this.players.length)
+  removeFromList(row: Player){
+    this.playerSelectionService.addPlayer(row);
+    console.log("Removed Player:" + row.name);
   }
 
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-     console.log(`Sorted ${sortState.direction}ending`);
-    } else {
-      console.log('Sorting cleared');
-    }
+  sortChange(sortState: Sort) {
+    this.playerSelectionService.sort(sortState, true);
   }
 
   ngAfterViewInit() {
     this.playerSelectionService.removedPlayerSource.subscribe(
-        (selectedPlayers: Player[]) => {
-          this.players = selectedPlayers;
-          this.selectedBoard.renderRows();
-        }
+      (selectedPlayers: Player[]) => {
+        this.players.data = selectedPlayers;
+        this.players.sort = this.sort;
+      }
     );
+  }
+
+  ngAfterViewChecked(){
+    this.changeDetector.detectChanges();
   }
 }

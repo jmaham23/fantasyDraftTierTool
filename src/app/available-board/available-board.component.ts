@@ -10,15 +10,14 @@ import {PlayerSelectionService} from "../player-selection.service";
   styleUrls: ['./available-board.component.css'],
 })
 export class AvailableBoardComponent implements AfterViewInit{
-  players!: Player[];
+  players: MatTableDataSource<Player> = new MatTableDataSource<Player>([]);
   displayedColumns: string[] = ['name', 'position', 'tier', 'rank'];
-  @ViewChild(MatTable) draftBoard!: MatTable<Player>;
+  @ViewChild(MatSort) sort!: MatSort
   constructor(private playerSelectionService: PlayerSelectionService, private changeDetector: ChangeDetectorRef) {
-    this.players = [];
   }
 
-  removeFromList(index: number, row: Player){
-    this.playerSelectionService.removePlayer(index);
+  removeFromList(row: Player){
+    this.playerSelectionService.removePlayer(row);
     console.log("Removed Player:" + row.name);
   }
 
@@ -29,8 +28,8 @@ export class AvailableBoardComponent implements AfterViewInit{
   ngAfterViewInit() {
     this.playerSelectionService.playerSource.subscribe(
         (selectedPlayers: Player[]) => {
-          this.players = selectedPlayers;
-          this.draftBoard.renderRows();
+          this.players.data = selectedPlayers;
+          this.players.sort = this.sort;
         }
     );
   }
