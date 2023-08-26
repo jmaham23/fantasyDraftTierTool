@@ -19,6 +19,5 @@ tr.draftboard-row {
 }
 
 tr.draftboard-row:hover {
-  background: #777;
   cursor:pointer;
 }

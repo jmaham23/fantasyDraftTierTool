@@ -1,20 +1,32 @@
-<div class="row">
-  <div class="column">
-    <mat-card class="example-card">
-      <mat-card-title>Available</mat-card-title>
-    </mat-card>
-    <app-available-board></app-available-board>
+<mat-sidenav-container>
+  <mat-toolbar>
+    Tier Based Draft Tool
+    <div class="flex-stretch"></div>
+    <span class="example-spacer"></span>
+    <mat-slide-toggle [formControl]="toggleControl" class="mr-8">
+    </mat-slide-toggle>
+    <mat-icon>bedtime</mat-icon>
+  </mat-toolbar>
+  <div class="row">
+    <div class="column">
+      <mat-card class="example-card">
+        <mat-card-title class="custom-card-title">Available</mat-card-title>
+      </mat-card>
+      <app-available-board></app-available-board>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="column">
+      <mat-card class="example-card">
+        <mat-card-title class="custom-card-title">Simple card</mat-card-title>
+      </mat-card>
+      afawaqwfafalkjbf
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="column">
+      <mat-card class="example-card">
+        <mat-card-title class="custom-card-title">Drafted</mat-card-title>
+      </mat-card>
+      <app-selected-board></app-selected-board>
+    </div>
   </div>
-  <div class="column">
-    <mat-card class="example-card">
-      <mat-card-title>Simple card</mat-card-title>
-    </mat-card>
-    afawaqwfafalkjbf
-  </div>
-  <div class="column">
-    <mat-card class="example-card">
-      <mat-card-title>Drafted</mat-card-title>
-    </mat-card>
-    <app-selected-board></app-selected-board>
-  </div>
-</div>
+</mat-sidenav-container>
