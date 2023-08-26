@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+mat-card-title {
+  color: lightblue;
+  font-size: 300px;
+  justify-content: center;
+  display: flex;
+}

@@ -1,5 +1,7 @@
-.table {
-  width: 100%;
+.demo-table {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20px;
 }
 
 .odd-tier {
@@ -10,6 +12,10 @@
 .even-tier {
   background-color: lightgreen; /* Set the background color for even tiers */
 
+}
+
+tr.draftboard-row {
+  height: calc(60vh/20);
 }
 
 tr.draftboard-row:hover {

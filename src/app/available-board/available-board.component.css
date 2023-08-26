@@ -1,5 +1,7 @@
-.table {
-    width: 100%;
+.demo-table {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 20px;
 }
 
 .odd-tier {
@@ -12,7 +14,11 @@
 
 }
 
+tr.draftboard-row {
+  height: calc(60vh/20);
+}
+
 tr.draftboard-row:hover {
-    background: #777;
-    cursor:pointer;
+  background: #777;
+  cursor:pointer;
 }

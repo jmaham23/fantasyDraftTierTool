@@ -8,7 +8,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
         MatTableModule,
         MatSortModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatCardModule
     ],
   providers: [],
   bootstrap: [AppComponent]
